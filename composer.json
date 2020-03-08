@@ -1,0 +1,45 @@
+{
+    "name": "fruitstudios/uploadit",
+    "description": "Front-end asset upload for user photos, fields, volumes and folders.",
+    "type": "craft-plugin",
+    "version": "1.0.9",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "asset uploader",
+        "front end",
+        "uploadit"
+    ],
+    "support": {
+        "docs": "https://github.com/fruitstudios/craft-uploadit/blob/master/README.md",
+        "issues": "https://github.com/fruitstudios/craft-uploadit/issues"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Fruit Studios",
+            "homepage": "http://fruitstudios.co.uk"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.2"
+    },
+    "autoload": {
+        "psr-4": {
+          "fruitstudios\\uploadit\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Uploadit",
+        "handle": "uploadit",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/fruitstudios/craft-uploadit/master/CHANGELOG.md",
+        "class": "fruitstudios\\uploadit\\Uploadit",
+        "components": {
+            "uploadit": "fruitstudios\\uploadit\\services\\UploaditService"
+        }
+    }
+}
