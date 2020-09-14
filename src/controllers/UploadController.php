@@ -25,7 +25,7 @@ class UploadController extends Controller
     public function actionIndex()
     {
         // AssetsController - actionSaveAsset()
-        $response = Craft::$app->runAction('assets/save-asset');
+        $response = Craft::$app->runAction('assets/upload');
 
         // Response Errors
         if($response->data['error'] ?? false)
