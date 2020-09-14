@@ -2,7 +2,7 @@
     "name": "shornuk/craft-upload",
     "description": "Front-end asset upload for user photos, fields, volumes and folders.",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "craft",
         "cms",
@@ -17,12 +17,6 @@
         "issues": "https://github.com/shornuk/craft-upload/issues"
     },
     "license": "proprietary",
-    "authors": [
-        {
-            "name": "Fruit Studios",
-            "homepage": "http://fruitstudios.co.uk"
-        }
-    ],
     "require": {
         "craftcms/cms": "^3.0.2"
     },
