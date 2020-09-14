@@ -2,9 +2,9 @@
 	{% set config = name is iterable ? name : {
 		icon: name
 	} %}
-	{% include "uploadit/_macros/_icon" with (config) only %}
+	{% include "upload/_macros/_icon" with (config) only %}
 {% endmacro %}
 
 {% macro preview(config) %}
-	{% include "uploadit/_macros/_preview" with (config ?? {}) only %}
+	{% include "upload/_macros/_preview" with (config ?? {}) only %}
 {% endmacro %}

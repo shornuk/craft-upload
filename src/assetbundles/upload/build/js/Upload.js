@@ -1,6 +1,6 @@
-var uploadits = {};
+var uploads = {};
 
-var UploaditAssets = (function() {
+var UploadAssets = (function() {
 	"use strict";
 
 	var defaults = {
@@ -378,7 +378,7 @@ var UploaditAssets = (function() {
 
 			xhr.responseType = "json";
 			var formData = new FormData();
-			formData.append("action", "uploadit/upload/can-upload");
+			formData.append("action", "upload/upload/can-upload");
 			formData.append(settings.csrfTokenName, settings.csrfTokenValue);
 			xhr.send(formData);
 		};
@@ -391,7 +391,7 @@ var UploaditAssets = (function() {
 
 		var getAssetFormData = function(asset) {
 			var formData = new FormData();
-			formData.append("action", "uploadit/upload");
+			formData.append("action", "upload/upload");
 			formData.append("assets-upload", asset);
 			switch (settings.type) {
 				case "field":
@@ -499,7 +499,7 @@ var UploaditAssets = (function() {
 	return constructor;
 })();
 
-var UploaditUserPhoto = (function() {
+var UploadUserPhoto = (function() {
 	"use strict";
 
 	var defaults = {
@@ -708,7 +708,7 @@ var UploaditUserPhoto = (function() {
 			xhr.responseType = "json";
 
 			var formData = new FormData();
-			formData.append("action", "uploadit/upload/user-photo");
+			formData.append("action", "upload/upload/user-photo");
 			formData.append("photo", photo);
 			formData.append(settings.csrfTokenName, settings.csrfTokenValue);
 			formData.append("transform", settings.transform);
@@ -786,7 +786,7 @@ var UploaditUserPhoto = (function() {
 			xhr.responseType = "json";
 
 			var formData = new FormData();
-			formData.append("action", "uploadit/upload/delete-user-photo");
+			formData.append("action", "upload/upload/delete-user-photo");
 			formData.append(settings.csrfTokenName, settings.csrfTokenValue);
 			xhr.send(formData);
 		};

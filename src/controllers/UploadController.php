@@ -1,8 +1,8 @@
 <?php
-namespace fruitstudios\uploadit\controllers;
+namespace shornuk\upload\controllers;
 
-use fruitstudios\uploadit\Uploadit;
-use fruitstudios\uploadit\helpers\UploaditHelper;
+use shornuk\upload\Upload;
+use shornuk\upload\helpers\UploadHelper;
 
 use Craft;
 use craft\web\Controller;
@@ -37,7 +37,7 @@ class UploadController extends Controller
         $asset = Craft::$app->getAssets()->getAssetById($response->data['assetId']);
         if(!$asset)
         {
-            return $this->asErrorJson(Craft::t('uploadit', 'Could not get uploaded asset.'));
+            return $this->asErrorJson(Craft::t('upload', 'Could not get uploaded asset.'));
         }
 
         // Is this a temporary upload?
@@ -76,13 +76,13 @@ class UploadController extends Controller
                 $elementSaved = Craft::$app->getElements()->saveElement($element);
                 if(!$elementSaved)
                 {
-                    return $this->asErrorJson(Craft::t('uploadit', 'Could not save uploaded asset.'));
+                    return $this->asErrorJson(Craft::t('upload', 'Could not save uploaded asset.'));
                 }
             }
         }
 
         // Preview
-        $html = UploaditHelper::renderTemplate('uploadit/_macros/_preview', [
+        $html = UploadHelper::renderTemplate('upload/_macros/_preview', [
             'asset' => $asset,
             'name' => $name,
             'view' => $view,
@@ -108,7 +108,7 @@ class UploadController extends Controller
         $currentUser = Craft::$app->getUser()->getIdentity();
         if(!$currentUser)
         {
-            return $this->asErrorJson(Craft::t('uploadit', 'Only logged in users can upload assets.'));
+            return $this->asErrorJson(Craft::t('upload', 'Only logged in users can upload assets.'));
         }
 
         // $volumeId = '44';
@@ -137,7 +137,7 @@ class UploadController extends Controller
 
         if (($file = UploadedFile::getInstanceByName('photo')) === null)
         {
-            return $this->asErrorJson(Craft::t('uploadit', 'User photo is required.'));
+            return $this->asErrorJson(Craft::t('upload', 'User photo is required.'));
         }
         try {
             if ($file->getHasError())

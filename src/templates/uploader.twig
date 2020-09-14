@@ -1,4 +1,4 @@
-{% import "uploadit/_macros" as macros %}
+{% import "upload/_macros" as macros %}
 
 {% set uploader = uploader ?? false %}
 
@@ -71,14 +71,14 @@
 
     <div class="uploadit--notice">
         {% if uploader.hasErrors() %}
-            <p>{{ 'Uploader Not Ready'|t('uploadit') }}</p>
+            <p>{{ 'Uploader Not Ready'|t('upload') }}</p>
             <ul class="uploadit--noticeErrors">
                 {% for error in uploader.getErrors() %}
                     <li>{{ error|filter|join(', ') }}</li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>{{ 'Uploader Not Found'|t('uploadit') }}</p>
+            <p>{{ 'Uploader Not Found'|t('upload') }}</p>
         {% endif %}
     </div>
 

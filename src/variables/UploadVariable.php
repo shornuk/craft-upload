@@ -1,21 +1,21 @@
 <?php
-namespace fruitstudios\uploadit\variables;
+namespace shornuk\upload\variables;
 
-use fruitstudios\uploadit\models\Uploader; // DEPRICIATE
+use shornuk\upload\models\Uploader; // DEPRICIATE
 
-use fruitstudios\uploadit\Uploadit;
-use fruitstudios\uploadit\assetbundles\uploadit\UploaditAssetBundle;
-use fruitstudios\uploadit\base\UploaderInterface;
-use fruitstudios\uploadit\models\VolumeUploader;
-use fruitstudios\uploadit\models\FieldUploader;
-use fruitstudios\uploadit\models\UserPhotoUploader;
+use shornuk\upload\Upload;
+use shornuk\upload\assetbundles\upload\UploadAssetBundle;
+use shornuk\upload\base\UploaderInterface;
+use shornuk\upload\models\VolumeUploader;
+use shornuk\upload\models\FieldUploader;
+use shornuk\upload\models\UserPhotoUploader;
 
 use Craft;
 use craft\web\View;
 use craft\helpers\Template as TemplateHelper;
 use craft\helpers\Json as JsonHelper;
 
-class UploaditVariable
+class UploadVariable
 {
     // Public Methods
     // =========================================================================

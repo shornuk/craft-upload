@@ -1,10 +1,10 @@
 <?php
-namespace fruitstudios\uploadit\models;
+namespace shornuk\upload\models;
 
-use fruitstudios\uploadit\Uploadit;
-use fruitstudios\uploadit\assetbundles\uploadit\UploaditAssetBundle;
-use fruitstudios\uploadit\base\Uploader;
-use fruitstudios\uploadit\helpers\UploaditHelper;
+use shornuk\upload\Upload;
+use shornuk\upload\assetbundles\upload\UploadAssetBundle;
+use shornuk\upload\base\Uploader;
+use shornuk\upload\helpers\UploadHelper;
 
 use Craft;
 use craft\base\ElementInterface;
@@ -46,14 +46,14 @@ class UserPhotoUploader extends Uploader
         parent::__construct();
 
         $this->enableRemove = true;
-        $this->selectText = Craft::t('uploadit', 'Edit');
+        $this->selectText = Craft::t('upload', 'Edit');
 
         // Populate
         $this->setAttributes($attributes, false);
 
         // Force
         $this->limit = 1;
-        $this->allowedFileExtensions = UploaditHelper::getAllowedFileExtensionsByFieldKinds(['image']);
+        $this->allowedFileExtensions = UploadHelper::getAllowedFileExtensionsByFieldKinds(['image']);
         $this->enableReorder = false;
         $this->setTarget();
 
@@ -101,11 +101,11 @@ class UserPhotoUploader extends Uploader
         $this->validate();
 
         $view = Craft::$app->getView();
-        $view->registerAssetBundle(UploaditAssetBundle::class);
-        $view->registerJs('new UploaditUserPhoto('.$this->getJavascriptVariables().');', View::POS_END);
+        $view->registerAssetBundle(UploadAssetBundle::class);
+        $view->registerJs('new UploadUserPhoto('.$this->getJavascriptVariables().');', View::POS_END);
         $view->registerCss($this->getCustomCss());
 
-        return UploaditHelper::renderTemplate('uploadit/userPhoto', [
+        return UploadHelper::renderTemplate('upload/userPhoto', [
             'uploader' => $this
         ]);
     }

@@ -1,9 +1,9 @@
 <?php
-namespace fruitstudios\uploadit\models;
+namespace shornuk\upload\models;
 
-use fruitstudios\uploadit\Uploadit;
-use fruitstudios\uploadit\base\Uploader;
-use fruitstudios\uploadit\helpers\UploaditHelper;
+use shornuk\upload\Upload;
+use shornuk\upload\base\Uploader;
+use shornuk\upload\helpers\UploadHelper;
 
 use Craft;
 use craft\base\ElementInterface;
@@ -43,7 +43,7 @@ class FieldUploader extends Uploader
     {
         $rules = parent::rules();
         $rules[] = [['name'], 'required'];
-        $rules[] = [['target'], 'required', 'message' => Craft::t('uploadit', 'A valid field and element must be set.')];
+        $rules[] = [['target'], 'required', 'message' => Craft::t('upload', 'A valid field and element must be set.')];
         return $rules;
     }
 
@@ -68,13 +68,13 @@ class FieldUploader extends Uploader
         $field = $this->field instanceof FieldInterface ? $this->field : false;
         if(!$field)
         {
-            $field = Uploadit::$plugin->service->getAssetFieldByHandleOrId($this->field);
+            $field = Upload::$plugin->service->getAssetFieldByHandleOrId($this->field);
         }
 
         // Field is a duffer
         if(!$field)
         {
-            $this->addError('field', Craft::t('uploadit', 'Could not locate your field.'));
+            $this->addError('field', Craft::t('upload', 'Could not locate your field.'));
             return false;
         }
 
@@ -89,7 +89,7 @@ class FieldUploader extends Uploader
             'elementId' => $element->id ?? null
         ];
         $this->limit = $field->limit ? $field->limit : null;
-        $this->allowedFileExtensions = UploaditHelper::getAllowedFileExtensionsByFieldKinds($field->allowedKinds);
+        $this->allowedFileExtensions = UploadHelper::getAllowedFileExtensionsByFieldKinds($field->allowedKinds);
 
         return true;
     }

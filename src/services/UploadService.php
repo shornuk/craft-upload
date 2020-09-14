@@ -1,13 +1,13 @@
 <?php
-namespace fruitstudios\uploadit\services;
+namespace shornuk\upload\services;
 
-use fruitstudios\uploadit\Uploadit;
-use fruitstudios\uploadit\helpers\UploaditHelper;
+use shornuk\upload\Upload;
+use shornuk\upload\helpers\UploadHelper;
 
 use Craft;
 use craft\base\Component;
 
-class UploaditService extends Component
+class UploadService extends Component
 {
     // Public Methods
     // =========================================================================
@@ -21,11 +21,11 @@ class UploaditService extends Component
 
     	if(is_numeric($handleOrId))
     	{
-			$field = UploaditHelper::getFieldById($handleOrId);
+			$field = UploadHelper::getFieldById($handleOrId);
     	}
     	else
     	{
-    		$field = UploaditHelper::getFieldByHandle($handleOrId);
+    		$field = UploadHelper::getFieldByHandle($handleOrId);
     	}
     	return $field;
     }

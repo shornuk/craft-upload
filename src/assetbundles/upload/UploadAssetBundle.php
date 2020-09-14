@@ -1,5 +1,5 @@
 <?php
-namespace fruitstudios\uploadit\assetbundles\uploadit;
+namespace shornuk\upload\assetbundles\upload;
 
 use Craft;
 
@@ -7,14 +7,14 @@ use yii\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
 
-class UploaditAssetBundle extends AssetBundle
+class UploadAssetBundle extends AssetBundle
 {
     // Public Methods
     // =========================================================================
 
     public function init()
     {
-        $this->sourcePath = "@fruitstudios/uploadit/assetbundles/uploadit/build";
+        $this->sourcePath = "@shornuk/upload/assetbundles/upload/build";
 
         $this->depends = [];
 
@@ -23,7 +23,7 @@ class UploaditAssetBundle extends AssetBundle
             'js/vendor/ready.js',
             'js/vendor/extend.js',
             'js/vendor/Sortable.js',
-            'js/Uploadit.js',
+            'js/Upload.js',
         ];
 
         $this->css = [

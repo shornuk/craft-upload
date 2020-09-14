@@ -1,5 +1,5 @@
 <?php
-namespace fruitstudios\uploadit\base;
+namespace shornuk\upload\base;
 
 use Craft;
 use craft\base\ComponentInterface;

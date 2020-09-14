@@ -1,8 +1,8 @@
 <?php
-namespace fruitstudios\uploadit\models;
+namespace shornuk\upload\models;
 
-use fruitstudios\uploadit\Uploadit;
-use fruitstudios\uploadit\base\Uploader;
+use shornuk\upload\Upload;
+use shornuk\upload\base\Uploader;
 
 use Craft;
 use craft\base\VolumeInterface;
@@ -44,7 +44,7 @@ class VolumeUploader extends Uploader
     {
         $rules = parent::rules();
         $rules[] = [['id'], 'required'];
-        $rules[] = [['target'], 'required', 'message' => Craft::t('uploadit', 'A valid volume and optional folder / path must be set.')];
+        $rules[] = [['target'], 'required', 'message' => Craft::t('upload', 'A valid volume and optional folder / path must be set.')];
         return $rules;
     }
 
@@ -66,7 +66,7 @@ class VolumeUploader extends Uploader
             // Folder is a duffer
             if(!$folder)
             {
-                $this->addError('folder', Craft::t('uploadit', 'We cant locate any folder by the id supplied.'));
+                $this->addError('folder', Craft::t('upload', 'We cant locate any folder by the id supplied.'));
                 return false;
             }
 
@@ -79,13 +79,13 @@ class VolumeUploader extends Uploader
         $volume = $this->volume instanceof VolumeInterface ? $this->volume : false;
         if(!$volume)
         {
-            $volume = Uploadit::$plugin->service->getVolumeByHandleOrId($this->volume);
+            $volume = Upload::$plugin->service->getVolumeByHandleOrId($this->volume);
         }
 
         // Volume is a duffer
         if(!$volume)
         {
-            $this->addError('volume', Craft::t('uploadit', 'We cant get a volume to work with.'));
+            $this->addError('volume', Craft::t('upload', 'We cant get a volume to work with.'));
             return false;
 
             // IDEA: Do we want to grab the first if nothing supplied
@@ -100,7 +100,7 @@ class VolumeUploader extends Uploader
         $folder = Craft::$app->getAssets()->getFolderById($folderId);
         if(!$folder)
         {
-            $this->addError('folder', Craft::t('uploadit', 'We cant get or create the top folder for the volume you supplied.'));
+            $this->addError('folder', Craft::t('upload', 'We cant get or create the top folder for the volume you supplied.'));
             return false;
         }
 
@@ -111,13 +111,13 @@ class VolumeUploader extends Uploader
             $folderId = Craft::$app->getAssets()->ensureFolderByFullPathAndVolume($this->folder, $volume, false);
             if(!$folderId)
             {
-                $this->addError('folder', Craft::t('uploadit', 'We cant find the folder path in the volume supplied.'));
+                $this->addError('folder', Craft::t('upload', 'We cant find the folder path in the volume supplied.'));
                 return false;
             }
             $folder = Craft::$app->getAssets()->getFolderById($folderId);
             if(!$folder)
             {
-                $this->addError('folder', Craft::t('uploadit', 'We cant create the folder at the path you supplied.'));
+                $this->addError('folder', Craft::t('upload', 'We cant create the folder at the path you supplied.'));
                 return false;
             }
         }

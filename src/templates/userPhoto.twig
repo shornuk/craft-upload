@@ -1,4 +1,4 @@
-{% import "uploadit/_macros" as macros %}
+{% import "upload/_macros" as macros %}
 
 {% set uploader = uploader ?? false %}
 {% if uploader and not uploader.hasErrors() %}
@@ -12,7 +12,7 @@
         uploader.customClass ? uploader.customClass : null,
     ]|filter|join(' ') %}
 
-     {% set defaultUserImageUrl = uploader.default.url(transform)|default(craft.app.assetManager.getPublishedUrl('@fruitstudios/uploadit/assetbundles/uploadit/build/images', true, 'user.png')) %}
+     {% set defaultUserImageUrl = uploader.default.url(transform)|default(craft.app.assetManager.getPublishedUrl('@shornuk/upload/assetbundles/upload/build/images', true, 'user.png')) %}
 
     {# Calculate Dimentions #}
     {% set width = uploader.width ?? false %}

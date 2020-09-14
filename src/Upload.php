@@ -4,14 +4,14 @@
  *
  * Front end asset upload tools for Craft CMS
  *
- * @link      http://fruitstudios.co.uk
+ * @link      http://shornuk.co.uk
  * @copyright Copyright (c) 2018 Fruit Studios
  */
 
-namespace fruitstudios\uploadit;
+namespace shornuk\upload;
 
-use fruitstudios\uploadit\services\UploaditService;
-use fruitstudios\uploadit\variables\UploaditVariable;
+use shornuk\upload\services\UploadService;
+use shornuk\upload\variables\UploadVariable;
 
 use Craft;
 use craft\base\Plugin;
@@ -32,7 +32,7 @@ use yii\base\Event;
  *
  * @property  UploaditServiceService $uploaditloaderService
  */
-class Uploadit extends Plugin
+class Upload extends Plugin
 {
     // Static Properties
     // =========================================================================
@@ -62,14 +62,14 @@ class Uploadit extends Plugin
         self::$plugin = $this;
 
         $this->setComponents([
-            'service' => UploaditService::class,
+            'service' => UploadService::class,
         ]);
 
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['siteActionTrigger1'] = 'uploadit/default';
+                $event->rules['siteActionTrigger1'] = 'upload/default';
             }
         );
 
@@ -79,13 +79,13 @@ class Uploadit extends Plugin
             function (Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
-                $variable->set('uploadit', UploaditVariable::class);
+                $variable->set('upload', UploadVariable::class);
             }
         );
 
         Craft::info(
             Craft::t(
-                'uploadit',
+                'upload',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),

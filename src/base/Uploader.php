@@ -1,10 +1,10 @@
 <?php
-namespace fruitstudios\uploadit\base;
+namespace shornuk\upload\base;
 
-use fruitstudios\uploadit\Uploadit;
-use fruitstudios\uploadit\base\UploaderInterface;
-use fruitstudios\uploadit\helpers\UploaditHelper;
-use fruitstudios\uploadit\assetbundles\uploadit\UploaditAssetBundle;
+use shornuk\upload\Upload;
+use shornuk\upload\base\UploaderInterface;
+use shornuk\upload\helpers\UploadHelper;
+use shornuk\upload\assetbundles\upload\UploadAssetBundle;
 
 use Craft;
 use craft\web\View;
@@ -75,9 +75,9 @@ abstract class Uploader extends Model implements UploaderInterface
         $config = Craft::$app->getConfig()->getGeneral();
 
         // Defualt Settings
-        $this->id = uniqid('uploadit');
-        $this->selectText = Craft::t('uploadit', 'Select files');
-        $this->dropText = Craft::t('uploadit', 'drop files here');
+        $this->id = uniqid('upload');
+        $this->selectText = Craft::t('upload', 'Select files');
+        $this->dropText = Craft::t('upload', 'drop files here');
         $this->maxSize = $config->maxUploadFileSize;
         $this->allowedFileExtensions = $config->allowedFileExtensions;
 
@@ -94,11 +94,11 @@ abstract class Uploader extends Model implements UploaderInterface
         $this->validate();
 
         $view = Craft::$app->getView();
-        $view->registerAssetBundle(UploaditAssetBundle::class);
-        $view->registerJs('new UploaditAssets('.$this->getJavascriptVariables().');', View::POS_END);
+        $view->registerAssetBundle(UploadAssetBundle::class);
+        $view->registerJs('new UploadAssets('.$this->getJavascriptVariables().');', View::POS_END);
         $view->registerCss($this->getCustomCss());
 
-        return UploaditHelper::renderTemplate('uploadit/uploader', [
+        return UploadHelper::renderTemplate('upload/uploader', [
             'uploader' => $this
         ]);
     }
@@ -109,7 +109,7 @@ abstract class Uploader extends Model implements UploaderInterface
 
         $rules = parent::rules();
         $rules[] = [['id'], 'required'];
-        $rules[] = [['maxSize'], 'integer', 'max' => $this->_defaultMaxUploadFileSize, 'message' => Craft::t('uploadit', 'Max file can\'t be greater than the global setting maxUploadFileSize')];
+        $rules[] = [['maxSize'], 'integer', 'max' => $this->_defaultMaxUploadFileSize, 'message' => Craft::t('upload', 'Max file can\'t be greater than the global setting maxUploadFileSize')];
         return $rules;
     }
 
@@ -176,7 +176,7 @@ abstract class Uploader extends Model implements UploaderInterface
         {
             if(!Craft::$app->getAssetTransforms()->getTransformByHandle($this->transform))
             {
-                $this->addError('transform', Craft::t('uploadit', 'Asset transform does not exist'));
+                $this->addError('transform', Craft::t('upload', 'Asset transform does not exist'));
                 return false;
             }
         }
