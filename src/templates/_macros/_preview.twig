@@ -37,21 +37,15 @@
             {% switch view %}
 
                 {% case "file" %}
-
                     {{ macros.icon('file') }}
                     <span class="uploadit--filename">{{ asset.filename }}</span>
 
                 {% case "image" %}
-
                     <img src="{{ assetUrl }}" alt="{{ asset.title }}" />
                     <span class="uploadit--filename">{{ asset.filename }}</span>
 
-                {% case "background" %}
-                    {#
-                        TODO: Needed? Are we keeping and hiding using CSS?
-                        <img src="{{ assetUrl }}" alt="{{ asset.title }}" />
-                        <span class="uploadit--filename">{{ asset.filename }}</span>
-                    #}
+                {% case "logo" %}
+                    <img class="uploadit--round" src="{{ assetUrl }}" alt="{{ asset.title }}" />
 
             {% endswitch %}
 

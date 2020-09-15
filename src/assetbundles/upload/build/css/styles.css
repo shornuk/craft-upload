@@ -2,8 +2,6 @@
 
 .uploadit--uploader {
     position: relative;
-    border:1px dotted #ccc;
-    border-radius: 6px;
 }
 
 .uploadit--uploader.uploadit--layout-grid {}
@@ -32,6 +30,9 @@
 .uploadit--assetPreview-background {}
 .uploadit--assetPreview-image {}
 .uploadit--assetPreview-file {}
+.uploadit--assetPreview-logo {
+    justify-content: flex-start;
+}
 
 .uploadit--icon {
     display: flex;
