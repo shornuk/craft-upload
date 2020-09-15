@@ -2,7 +2,7 @@
     "name": "shornuk/craft-upload",
     "description": "Front-end asset upload for user photos, fields, volumes and folders.",
     "type": "craft-plugin",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "keywords": [
         "craft",
         "cms",
