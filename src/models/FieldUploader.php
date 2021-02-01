@@ -86,7 +86,7 @@ class FieldUploader extends Uploader
         // Set any uploader defaults based on the field
         $this->target = [
             'fieldId' => $field->id,
-            'elementId' => $element->id ?? null
+            'elementId' => $element->id ?? ''
         ];
         $this->limit = $field->limit ? $field->limit : null;
         $this->allowedFileExtensions = UploadHelper::getAllowedFileExtensionsByFieldKinds($field->allowedKinds);
