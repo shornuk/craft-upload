@@ -48,7 +48,7 @@ class UploadVariable
 
         if(!$uploader)
         {
-            return TemplateHelper::raw('<p>Invalid Uploder!</p>');
+            return TemplateHelper::raw('<p>Invalid Uploader!</p>');
         }
 
         return TemplateHelper::raw($uploader->render());

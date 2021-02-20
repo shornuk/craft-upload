@@ -11,7 +11,8 @@
         uploader.customClass ? uploader.customClass : null,
     ]|filter|join(' ') %}
 
-    {% set assets = uploader.assets ? uploader.assets.all()[:(uploader.limit)] : [] %}
+    {% set assetsArray = uploader.assets is instance of('craft\\elements\\db\\AssetQuery') ? uploader.assets.all() : uploader.assets %}
+    {% set assets = assetsArray ? assetsArray[:(uploader.limit)] : [] %}
 
     <div id="{{ uploader.id }}" class="{{ classes }}">
 
