@@ -20,29 +20,30 @@
         } %}
     {% endif %}
 
-    {% set classes = [
-        'uploadit--asset',
-        'uploadit--assetPreview-' ~ view,
-    ]|filter|join(' ') %}
 
-    {% set assetUrl = asset.url ? asset.url(transform) : asset.getThumbUrl(800) %}
+    {# {% set assetUrl = asset.url ? asset.url(transform) : asset.getThumbUrl(800) %} #}
 
-    {% set attributes = [
+{#     {% set attributes = [
         view == 'background' ? 'style="background-image: url('~assetUrl~');"' : null,
-    ]|filter|join(' ') %}
+    ]|filter|join(' ') %} #}
 
-    <li class="{{ classes }}" {{ attributes|raw }}>
+    {% set attributes = {
+        class: [
+            'uploadit--asset',
+            'uploadit--assetPreview-' ~ view
+        ]|filter,
+    } %}
 
-        <span class="uploadit--icon">
+    <li {{ attr(attributes)}}>
+
+        <div class="uploadit--thumb">
             {% switch view %}
 
                 {% case "file" %}
                     {{ macros.icon('file') }}
-                    <span class="uploadit--filename">{{ asset.filename }}</span>
 
                 {% case "image" %}
-                    <img src="{{ assetUrl }}" alt="{{ asset.title }}" />
-                    <span class="uploadit--filename">{{ asset.filename }}</span>
+                    {# <img src="{{ assetUrl }}" alt="{{ asset.title }}" /> #}
 
                 {% case "logo" %}
                     <img class="uploadit--round" src="{{ assetUrl }}" alt="{{ asset.title }}" />
@@ -52,7 +53,9 @@
 
             {% endswitch %}
 
-        </span>
+        </div>
+
+        <span class="uploadit--filename">{{ asset.filename }}</span>
 
 
         {% if name %}
