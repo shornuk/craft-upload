@@ -36,6 +36,11 @@
 
     <li {{ attr(attributes)}}>
 
+        {% if name %}
+            {% set name = name|replace({'[]': ''}) ~ '[]' %}
+            <input type="hidden" name="{{ name }}" value="{{ asset.id }}">
+        {% endif %}
+
         <div class="uploadit--thumb">
             {% switch view %}
 
@@ -55,16 +60,12 @@
 
         </div>
 
-        <span class="uploadit--filename">{{ asset.filename }}</span>
-
-
-        {% if name %}
-            {% set name = name|replace({'[]': ''}) ~ '[]' %}
-            <input type="hidden" name="{{ name }}" value="{{ asset.id }}">
-        {% endif %}
+        <div class="uploadit--filename">{{ asset.filename }}</div>
 
         {% if enableRemove %}
-            <a class="uploadit--remove">{{ macros.icon('close') }}</a>
+            <div class="uploadit--remove">
+                <a>{{ macros.icon('close') }}</a>
+            </div>
         {% endif %}
 
     </li>

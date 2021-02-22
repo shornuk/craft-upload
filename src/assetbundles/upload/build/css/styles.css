@@ -41,7 +41,6 @@
     position: relative;
     background-color: lightgray;
     width: 120px;
-    margin-right: 16px;
 }
 
 .uploadit--thumb::before {
@@ -56,14 +55,17 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-right: 16px;
+    margin-left: 16px;
+    flex-grow: 1;
 }
 
 .uploadit--fileIcon {}
 
 .uploadit--asset img {}
 
-.uploadit--remove {}
+.uploadit--remove {
+    margin-left: 16px;
+}
 
 .uploadit--remove svg {}
 
