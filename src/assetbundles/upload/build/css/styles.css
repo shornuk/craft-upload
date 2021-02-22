@@ -23,7 +23,7 @@
     overflow: hidden;
 }
 
-.uploadit--reorderEnabled .uploadit--asset:hover {
+.uploadit--reorderEnabled .uploadit--thumb:hover {
     cursor: all-scroll;
 }
 
@@ -39,8 +39,8 @@
 .uploadit--thumb {
     flex-shrink: 0;
     position: relative;
-    background-color: lightgray;
-    width: 120px;
+    background-color: rgb(242, 242, 242);
+    width: 90px;
 }
 
 .uploadit--thumb::before {
@@ -51,12 +51,19 @@
     display: flow-root;
 }
 
+
+.uploadit--fileType {}
+
+.uploadit--details {
+    margin-left: 16px;
+    flex-grow: 1;
+    min-width: 0;
+}
+
 .uploadit--filename {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-left: 16px;
-    flex-grow: 1;
 }
 
 .uploadit--fileIcon {}
@@ -64,7 +71,21 @@
 .uploadit--asset img {}
 
 .uploadit--remove {
+    flex-grow: 0;
+    max-width: 44px;
     margin-left: 16px;
+}
+
+.uploadit--remove button {
+    border-radius: 999px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.uploadit--remove button:hover{
+    background-color: rgb(242, 242, 242);
 }
 
 .uploadit--remove svg {}

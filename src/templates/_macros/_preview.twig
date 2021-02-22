@@ -45,7 +45,7 @@
             {% switch view %}
 
                 {% case "file" %}
-                    {{ macros.icon('file') }}
+                    <div class="uploadit--fileType">.{{ asset.extension }}</div>
 
                 {% case "image" %}
                     {# <img src="{{ assetUrl }}" alt="{{ asset.title }}" /> #}
@@ -60,11 +60,15 @@
 
         </div>
 
-        <div class="uploadit--filename">{{ asset.filename }}</div>
+        <div class="uploadit--details">
+            <div class="uploadit--filename">{{ asset.filename }}</div>
+            <div class="uploadit--size">{{ (asset.size/1000)|number_format(2, '.', ',') }} KB</div>
+        </div>
+
 
         {% if enableRemove %}
             <div class="uploadit--remove">
-                <a>{{ macros.icon('close') }}</a>
+                <button type="button">{{ macros.icon('close') }}</a>
             </div>
         {% endif %}
 
