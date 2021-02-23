@@ -48,13 +48,17 @@
             <div class="uploadit--controls-inner">
 
                 <button type="button" class="uploadit--upload">
-                    {% if uploader.showUploadIcon %}
+                    {# {% if uploader.showUploadIcon %}
                       {{ macros.icon('upload') }}
                     {% endif %}
-                    <span class="uploadit--label">{{ uploader.selectText }}</span>
+
                     {% if uploader.enableDropToUpload %}
                         <span class="uploadit--or">{{ 'or'|t('uploadit') }}</span>
                         <span class="uploadit--btn">{{ uploader.dropText }}</span>
+                    {% endif %} #}
+                    <span class="uploadit--label">{{ uploader.selectText }}</span>
+                    {% if uploader.enableDropToUpload %}
+                        <p>or drop files here</p>
                     {% endif %}
                 </button>
 

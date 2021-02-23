@@ -212,7 +212,7 @@ var UploadAssets = (function() {
 		};
 
 		var updateUploadProgress = function(qid, progress) {
-			var progressBar = queue[qid].dom.progress.querySelector('.uploadit--placeholderProgressBar')
+			var progressBar = queue[qid].dom.progress.querySelector('.uploadit--placeholderProgressBar span')
 			var progressText = queue[qid].dom.progress.querySelector('.uploadit--placeholderProgressText')
 			progressBar.style.width = progress;
 			progressText.textContent = progress;
@@ -290,8 +290,8 @@ var UploadAssets = (function() {
 
 			// Validate Size
 			if(asset.size > settings.maxSize) {
-				setUploadError(asset.qid, 'File size cannot exceed ' + settings.maxSizeMb + 'MB');
-				updateUploadProgress(asset.qid, '');
+				setUploadError(asset.qid, asset.name + ' is too big (' + settings.maxSizeMb + 'MB max)');
+				updateUploadProgress(asset.qid, '0%');
 				return;
 			}
 
@@ -337,7 +337,7 @@ var UploadAssets = (function() {
 
 					} else {
 
-						// updateUploadProgress(asset.qid, 'Processing Upload');
+						updateUploadProgress(asset.qid, 'Processing');
 
 						var preview = htmlToElement(response.html);
 
