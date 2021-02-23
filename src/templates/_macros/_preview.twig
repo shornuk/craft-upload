@@ -13,15 +13,15 @@
     {% if not transform %}
         {% set transform = {
             mode: 'crop',
-            width: 400,
-            height: 400,
+            width: 200,
+            height: 150,
             quality: 90,
             position: 'center-center'
         } %}
     {% endif %}
 
 
-    {# {% set assetUrl = asset.url ? asset.url(transform) : asset.getThumbUrl(800) %} #}
+    {% set assetUrl = asset.url ? asset.url(transform) : asset.getThumbUrl(800) %}
 
 {#     {% set attributes = [
         view == 'background' ? 'style="background-image: url('~assetUrl~');"' : null,
@@ -34,6 +34,26 @@
         ]|filter,
     } %}
 
+   {#  <li class="uploadit--asset uploadit--placeholder">
+            <div class="uploadit--thumb"></div>
+            <div class="uploadit--details">
+                <span class="uploadit--placeholderFilename"></span>
+                <span class="uploadit--placeholderError"></span>
+                <div class="uploadit--placeholderProgress">
+                    <p class="uploadit--placeholderProgressText">100%</p>
+                    <div class="uploadit--placeholderProgressBar">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="uploadit--remove">
+                <button type="button">
+                    <svg class="uploadit--closeIcon" fill="none" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path xmlns="http://www.w3.org/2000/svg" d="M5.293 5.293a1 1 0 011.414 0L12 10.586l5.293-5.293a1 1 0 111.414 1.414L13.414 12l5.293 5.293a1 1 0 01-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 01-1.414-1.414L10.586 12 5.293 6.707a1 1 0 010-1.414z" fill="#0D0D0D"></path>
+                    </svg>
+                </button>
+            </div>
+        </li> #}
+
     <li {{ attr(attributes)}}>
 
         {% if name %}
@@ -42,27 +62,28 @@
         {% endif %}
 
         <div class="uploadit--thumb">
-            {% switch view %}
+            <div>
+                {% switch view %}
 
-                {% case "file" %}
-                    <div class="uploadit--fileType">.{{ asset.extension }}</div>
+                    {% case "file" %}
+                        <div class="uploadit--fileType">.{{ asset.extension }}</div>
 
-                {% case "image" %}
-                    {# <img src="{{ assetUrl }}" alt="{{ asset.title }}" /> #}
+                    {% case "image" %}
+                        <img class="uploadit--imagePreview" src="{{ assetUrl }}" alt="{{ asset.title }}" />
 
-                {% case "logo" %}
-                    <img class="uploadit--round" src="{{ assetUrl }}" alt="{{ asset.title }}" />
+                    {% case "logo" %}
+                        <img class="uploadit--round" src="{{ assetUrl }}" alt="{{ asset.title }}" />
 
-                {% case "header" %}
-                    <img class="uploadit--landscape" src="{{ assetUrl }}" alt="{{ asset.title }}" />
+                    {% case "header" %}
+                        <img class="uploadit--landscape" src="{{ assetUrl }}" alt="{{ asset.title }}" />
 
-            {% endswitch %}
-
+                {% endswitch %}
+            </div>
         </div>
 
         <div class="uploadit--details">
             <div class="uploadit--filename">{{ asset.filename }}</div>
-            <div class="uploadit--size">{{ (asset.size/1000)|number_format(2, '.', ',') }} KB</div>
+            <div class="uploadit--size">{{ asset.size|formatSizeUnits }}</div>
         </div>
 
 

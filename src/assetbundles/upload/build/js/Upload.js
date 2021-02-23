@@ -34,7 +34,7 @@ var UploadAssets = (function() {
 
 	var templates = {
 		// placeholder: '<li class="uploadit--placeholder uploadit--isLoading"><span class="uploadit--placeholderCancel">Cancel</span><span class="uploadit--placeholderProgress"></span><span class="uploadit--placeholderError"></span></li>'
-		placeholder: '<li class="uploadit--placeholder uploadit--isLoading"><span class="uploadit--placeholderCancel"><a class="uploadit--remove"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><path d="M32.202 27.36L58.62.944c1.226-1.225 3.212-1.225 4.437 0s1.225 3.21 0 4.437L36.64 31.8l26.417 26.418c1.225 1.225 1.225 3.212 0 4.437s-3.21 1.225-4.437 0l-26.418-26.42L5.784 62.653c-1.225 1.225-3.212 1.225-4.437 0s-1.225-3.212 0-4.437l26.418-26.418L1.347 5.38C.122 4.154.122 2.168 1.347.943s3.212-1.225 4.437 0L32.202 27.36z"/></svg></a></span><span class="uploadit--placeholderProgress"></span><span class="uploadit--placeholderError"></span></li>'
+		placeholder: '<li class="uploadit--asset uploadit--placeholder"><div class="uploadit--thumb"></div><div class="uploadit--details"><span class="uploadit--placeholderFilename"></span><span class="uploadit--placeholderError"></span><div class="uploadit--placeholderProgress"><span class="uploadit--placeholderProgressText"></span><span class="uploadit--placeholderProgressBar"><span></span></span></div></div><div class="uploadit--remove"><button type="button"><svg class="uploadit--closeIcon" fill="none" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path xmlns="http://www.w3.org/2000/svg" d="M5.293 5.293a1 1 0 011.414 0L12 10.586l5.293-5.293a1 1 0 111.414 1.414L13.414 12l5.293 5.293a1 1 0 01-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 01-1.414-1.414L10.586 12 5.293 6.707a1 1 0 010-1.414z" fill="#0D0D0D"></path></svg></button></div></li>'
 	};
 
 	var constructor = function(options) {
@@ -137,7 +137,7 @@ var UploadAssets = (function() {
 					upload.classList.remove("uploadit--isDragging");
 					var assets = event.dataTransfer.files;
 					if (!assets.length) {
-						api.setGlobalError("Drop Error");
+						// api.setGlobalError("Drop Error");
 						return;
 					}
 					api.uploadAssets(assets);
@@ -212,7 +212,10 @@ var UploadAssets = (function() {
 		};
 
 		var updateUploadProgress = function(qid, progress) {
-			queue[qid].dom.progress.textContent = progress;
+			var progressBar = queue[qid].dom.progress.querySelector('.uploadit--placeholderProgressBar')
+			var progressText = queue[qid].dom.progress.querySelector('.uploadit--placeholderProgressText')
+			progressBar.style.width = progress;
+			progressText.textContent = progress;
 		};
 
 		var setUploadError = function(qid, error) {
@@ -270,6 +273,7 @@ var UploadAssets = (function() {
 						placeholder: placeholder,
 						error: placeholder.querySelector('.uploadit--placeholderError'),
 						progress: placeholder.querySelector('.uploadit--placeholderProgress'),
+						filename: placeholder.querySelector('.uploadit--placeholderFilename'),
 					}
 				};
 				updateUploadProgress(qid, '0%');
@@ -299,13 +303,20 @@ var UploadAssets = (function() {
 				return;
 			}
 
+			queue[asset.qid].dom.filename.textContent = asset.name;
+
 			// Request
 			var xhr = new XMLHttpRequest();
 
 			// Progress
 			xhr.upload.onprogress = function(event) {
-				var progress = Math.round(event.loaded / event.total * 100);
-				updateUploadProgress(asset.qid, progress + '%');
+
+				if (event.lengthComputable)
+			    {
+			        var progress = parseInt((event.loaded / event.total) * 100);
+			        updateUploadProgress(asset.qid, progress + '%');
+			    }
+
 			};
 
 			xhr.open("POST", "/", true);
@@ -326,7 +337,7 @@ var UploadAssets = (function() {
 
 					} else {
 
-						updateUploadProgress(asset.qid, 'Processing Upload');
+						// updateUploadProgress(asset.qid, 'Processing Upload');
 
 						var preview = htmlToElement(response.html);
 

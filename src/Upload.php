@@ -12,6 +12,7 @@ namespace shornuk\upload;
 
 use shornuk\upload\services\UploadService;
 use shornuk\upload\variables\UploadVariable;
+use shornuk\upload\web\twig\Extension;
 
 use Craft;
 use craft\base\Plugin;
@@ -65,6 +66,9 @@ class Upload extends Plugin
             'service' => UploadService::class,
         ]);
 
+        $this->_registerTwigExtensions();
+
+
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
@@ -95,5 +99,10 @@ class Upload extends Plugin
 
     // Protected Methods
     // =========================================================================
+    //
+    private function _registerTwigExtensions()
+    {
+        Craft::$app->view->registerTwigExtension(new Extension);
+    }
 
 }

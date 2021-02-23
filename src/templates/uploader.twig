@@ -47,7 +47,7 @@
 
             <div class="uploadit--controls-inner">
 
-                <a href="javascript:;" class="uploadit--upload">
+                <button type="button" class="uploadit--upload">
                     {% if uploader.showUploadIcon %}
                       {{ macros.icon('upload') }}
                     {% endif %}
@@ -56,7 +56,7 @@
                         <span class="uploadit--or">{{ 'or'|t('uploadit') }}</span>
                         <span class="uploadit--btn">{{ uploader.dropText }}</span>
                     {% endif %}
-                </a>
+                </button>
 
                 <input type="file" name="uploaditAssetInput" style="display:none;"{{ not uploader.limit or uploader.limit > 1 ? ' multiple' }} />
 
