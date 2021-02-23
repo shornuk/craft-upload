@@ -185,4 +185,10 @@ class UploadController extends Controller
         return $this->asJson(['success' => true]);
     }
 
+    public function actionSaveAsset()
+    {
+        $response = Craft::$app->runAction('assets/save-asset');
+        return $this->asJson(['success' => true]);
+    }
+
 }

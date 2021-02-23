@@ -1,6 +1,7 @@
 {% import "upload/_macros" as macros %}
 
 {% set asset = asset ?? false %}
+{% set index = index ?? false %}
 {% set name = name ?? false %}
 {% set transform = transform ?? false %}
 {% set enableRemove = enableRemove ?? false %}
@@ -84,6 +85,15 @@
         <div class="uploadit--details">
             <div class="uploadit--filename">{{ asset.filename }}</div>
             <div class="uploadit--size">{{ asset.size|formatSizeUnits }}</div>
+
+           {#  <form >
+                {{ hiddenInput('action', 'upload/upload/save-asset') }}
+                {{ hiddenInput('siteId', '1') }}
+                {{ hiddenInput('assetId', asset.id) }}
+                <input type="text" name="title" value="{{ asset.title ?? '' }}">
+                <input type="submit" name="save">
+            </form> #}
+
         </div>
 
 

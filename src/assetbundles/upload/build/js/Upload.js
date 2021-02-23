@@ -299,7 +299,7 @@ var UploadAssets = (function() {
 			var extension = asset.name.split('.').pop();
 			if(settings.allowedFileExtensions.indexOf(extension) === -1) {
 				setUploadError(asset.qid, 'Invalid file type');
-				updateUploadProgress(asset.qid, '');
+				updateUploadProgress(asset.qid, '0%');
 				return;
 			}
 
