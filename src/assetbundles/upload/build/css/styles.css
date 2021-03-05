@@ -31,7 +31,7 @@
 }
 
 
-
+/* Normal landscape thumb background */
 .uploadit--thumb {
     flex-shrink: 0;
     position: relative;
@@ -59,6 +59,59 @@
     align-items: center;
     justify-content: center;
 }
+
+.uploadit--logoControls {
+    display: flex;
+}
+
+/* If logo, make it round */
+.uploadit--thumb-logo {
+    border-radius: 9999px;
+    width: 120px;
+}
+
+.uploadit--thumb-logo::before {
+    padding-top: 100%;
+}
+
+.uploadit--thumb-logo img {
+    border-radius: 9999px;
+}
+
+
+.uploadit--thumb-bg {
+    position: relative;
+    width: 100%;
+}
+.uploadit--thumb-bg::before {
+    padding-top: 50%;
+}
+
+.uploadit--thumb-bg img {
+    border-radius: 12px;
+}
+
+.uploadit--assetPreview-bg .uploadit--remove {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    z-index: 10;
+    margin: 0;
+}
+
+.uploadit--assetPreview-bg .uploadit--remove button {
+    background-color: rgb(255, 255, 255, 0.5);
+    transition: 0.1s;
+}
+.uploadit--assetPreview-bg .uploadit--remove button:hover{
+    background-color: rgb(255, 255, 255, 1);
+}
+
+
+
+
+
+
 
 .uploadit--reorderEnabled .uploadit--thumb:hover {
     cursor: all-scroll;
@@ -97,7 +150,6 @@
 
 .uploadit--remove {
     flex-grow: 0;
-    max-width: 44px;
     margin-left: 16px;
 }
 
@@ -108,6 +160,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent;
     transition: 0.1s;
 }
 .uploadit--remove button:hover{

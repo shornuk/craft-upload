@@ -1,0 +1,61 @@
+{% from "upload/_macros" import preview %}
+{% set classes = [
+        'uploadit--uploader',
+        'uploadit--layout-' ~ uploader.layout,
+        uploader.enableReorder ? 'uploadit--reorderEnabled' : null,
+        uploader.customClass ? uploader.customClass : null,
+    ]|filter|join(' ') %}
+
+    {% set assetsArray = uploader.assets is instance of('craft\\elements\\db\\AssetQuery') ? uploader.assets.all() : uploader.assets %}
+    {% set assets = assetsArray ? assetsArray[:(uploader.limit)] : [] %}
+
+    <div id="{{ uploader.id }}" class="{{ classes }}">
+
+        <div class="uploadit--errors uploadit--isHidden"></div>
+
+        {% if uploader.type == 'field' and uploader.name %}
+            <input type="hidden" name="{{ uploader.name|replace({'[]': ''}) }}" value="" />
+        {% endif %}
+
+
+        <ul id="{{ uploader.id }}Assets" class="uploadit--assets">
+
+            {% if assets|length %}
+
+               {% for asset in assets %}
+
+                   {{ preview({
+                       asset: asset,
+                       name: uploader.name,
+                       transform: uploader.transform,
+                       enableReorder: uploader.enableReorder,
+                       enableRemove: uploader.enableRemove,
+                       view: uploader.view,
+                   }) }}
+
+               {% endfor %}
+
+           {% endif %}
+
+        </ul>
+
+        <div class="uploadit--controls{{ uploader.limit and assets|length >= uploader.limit ? ' uploadit--isHidden' }}">
+
+            <div class="uploadit--controls-inner">
+
+                <button type="button" class="uploadit--upload">
+                    <span class="uploadit--label">{{ uploader.selectText }}</span>
+                    {% if uploader.enableDropToUpload %}
+                        <span>or drop files here</span>
+                    {% endif %}
+                </button>
+
+                <input type="file" name="uploaditAssetInput" style="display:none;"{{ not uploader.limit or uploader.limit > 1 ? ' multiple' }} />
+
+            </div>
+
+        </div>
+
+        <div class="uploadit--preload uploadit--isHidden"></div>
+
+    </div>

@@ -1,4 +1,4 @@
-{% import "upload/_macros" as macros %}
+{% from "upload/_macros" import icon %}
 
 {% set asset = asset ?? false %}
 {% set index = index ?? false %}
@@ -21,12 +21,7 @@
         } %}
     {% endif %}
 
-
     {% set assetUrl = asset.url ? asset.url(transform) : asset.getThumbUrl(800) %}
-
-{#     {% set attributes = [
-        view == 'background' ? 'style="background-image: url('~assetUrl~');"' : null,
-    ]|filter|join(' ') %} #}
 
     {% set attributes = {
         class: [
@@ -35,25 +30,6 @@
         ]|filter,
     } %}
 
-   {#  <li class="uploadit--asset uploadit--placeholder">
-            <div class="uploadit--thumb"></div>
-            <div class="uploadit--details">
-                <span class="uploadit--placeholderFilename"></span>
-                <span class="uploadit--placeholderError"></span>
-                <div class="uploadit--placeholderProgress">
-                    <p class="uploadit--placeholderProgressText">100%</p>
-                    <div class="uploadit--placeholderProgressBar">
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-            <div class="uploadit--remove">
-                <button type="button">
-                    <svg class="uploadit--closeIcon" fill="none" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path xmlns="http://www.w3.org/2000/svg" d="M5.293 5.293a1 1 0 011.414 0L12 10.586l5.293-5.293a1 1 0 111.414 1.414L13.414 12l5.293 5.293a1 1 0 01-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 01-1.414-1.414L10.586 12 5.293 6.707a1 1 0 010-1.414z" fill="#0D0D0D"></path>
-                    </svg>
-                </button>
-            </div>
-        </li> #}
 
     <li {{ attr(attributes)}}>
 
@@ -99,7 +75,7 @@
 
         {% if enableRemove %}
             <div class="uploadit--remove">
-                <button type="button">{{ macros.icon('close') }}</a>
+                <button type="button">{{ icon('close') }}</a>
             </div>
         {% endif %}
 

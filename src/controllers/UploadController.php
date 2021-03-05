@@ -51,6 +51,7 @@ class UploadController extends Controller
         $request = Craft::$app->getRequest();
         $name = $request->getParam('name', false);
         $view = $request->getParam('view', false);
+        $layout = $request->getParam('layout', false);
         $transform = $request->getParam('transform', '');
         $enableReorder = (bool)$request->getParam('enableReorder', false);
         $enableRemove = (bool)$request->getParam('enableRemove', false);
@@ -81,8 +82,18 @@ class UploadController extends Controller
             }
         }
 
+        $macro = 'preview';
+        if ($layout == 'background')
+        {
+            $macro = 'previewBg';
+        }
+        if ($layout == 'logo')
+        {
+            $macro = 'previewLogo';
+        }
+
         // Preview
-        $html = UploadHelper::renderTemplate('upload/_macros/_preview', [
+        $html = UploadHelper::renderTemplate('upload/_macros/'.$macro, [
             'asset' => $asset,
             'name' => $name,
             'view' => $view,

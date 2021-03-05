@@ -33,7 +33,6 @@ var UploadAssets = (function() {
 	};
 
 	var templates = {
-		// placeholder: '<li class="uploadit--placeholder uploadit--isLoading"><span class="uploadit--placeholderCancel">Cancel</span><span class="uploadit--placeholderProgress"></span><span class="uploadit--placeholderError"></span></li>'
 		placeholder: '<li class="uploadit--asset uploadit--placeholder"><div class="uploadit--thumb"></div><div class="uploadit--details"><span class="uploadit--placeholderFilename"></span><span class="uploadit--placeholderError"></span><div class="uploadit--placeholderProgress"><span class="uploadit--placeholderProgressText"></span><span class="uploadit--placeholderProgressBar"><span></span></span></div></div><div class="uploadit--remove"><button type="button"><svg class="uploadit--closeIcon" fill="none" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path xmlns="http://www.w3.org/2000/svg" d="M5.293 5.293a1 1 0 011.414 0L12 10.586l5.293-5.293a1 1 0 111.414 1.414L13.414 12l5.293 5.293a1 1 0 01-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 01-1.414-1.414L10.586 12 5.293 6.707a1 1 0 010-1.414z" fill="#0D0D0D"></path></svg></button></div></li>'
 	};
 
@@ -105,6 +104,7 @@ var UploadAssets = (function() {
 
 		var checkLimit = function() {
 			var numberOfUploadedAssets = api.getNumberOfUploadedAssets();
+			console.log(numberOfUploadedAssets);
 			if (settings.limit && numberOfUploadedAssets >= settings.limit) {
 				dom.controls.classList.add("uploadit--isHidden");
 			} else {
@@ -418,6 +418,7 @@ var UploadAssets = (function() {
 			formData.append(settings.csrfTokenName, settings.csrfTokenValue);
 			formData.append("name", settings.name);
 			formData.append("view", settings.view);
+			formData.append("layout", settings.layout);
 			formData.append("transform", settings.transform);
 			formData.append("enableReorder", settings.enableReorder ? 1 : 0);
 			formData.append("enableRemove", settings.enableRemove ? 1 : 0);

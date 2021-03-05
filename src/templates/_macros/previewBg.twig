@@ -1,0 +1,55 @@
+{% from "upload/_macros" import icon %}
+
+{% set asset = asset ?? false %}
+{% set index = index ?? false %}
+{% set name = name ?? false %}
+{% set transform = transform ?? false %}
+{% set enableRemove = enableRemove ?? false %}
+
+{% if asset %}
+
+    {% if not transform %}
+        {% set transform = {
+            mode: 'crop',
+            width: 600,
+            height: 300,
+            quality: 90,
+            position: 'center-center'
+        } %}
+    {% endif %}
+
+    {% set assetUrl = asset.url ? asset.url(transform) : asset.getThumbUrl(300) %}
+
+    {% set attributes = {
+        class: [
+            'uploadit--asset',
+            'uploadit--assetPreview-bg'
+        ]|filter,
+    } %}
+
+    <div {{ attr(attributes)}}>
+
+        {% if name %}
+            {% set name = name|replace({'[]': ''}) ~ '[]' %}
+            <input type="hidden" name="{{ name }}" value="{{ asset.id }}">
+        {% endif %}
+
+        <div class="uploadit--thumb uploadit--thumb-bg">
+            <div>
+                <img src="{{ assetUrl }}" alt="{{ asset.title }}" />
+            </div>
+        </div>
+
+        {% if enableRemove %}
+            <div class="uploadit--remove">
+                <button type="button">{{ icon('close') }}</a>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endif %}
+
+
+
+

@@ -1,0 +1,47 @@
+{% from "upload/_macros" import previewBg %}
+{% set classes = [
+    'uploadit--uploader',
+    'uploadit--layout-' ~ uploader.layout,
+    uploader.customClass ? uploader.customClass : null,
+]|filter|join(' ') %}
+
+{% set asset = uploader.assets is instance of('craft\\elements\\db\\AssetQuery') ? uploader.assets.one() : uploader.asset %}
+
+<div id="{{ uploader.id }}" class="{{ classes }}">
+
+    <div class="uploadit--errors uploadit--isHidden"></div>
+
+    {% if uploader.type == 'field' and uploader.name %}
+        <input type="hidden" name="{{ uploader.name|replace({'[]': ''}) }}" value="" />
+    {% endif %}
+
+    <div id="{{ uploader.id }}Assets" class="uploadit--assets">
+        {% if asset|length %}
+            {{ previewBg({
+                asset: asset,
+                name: uploader.name,
+                transform: uploader.transform,
+                enableReorder: uploader.enableReorder,
+                enableRemove: uploader.enableRemove,
+                view: uploader.view,
+            }) }}
+        {% endif %}
+    </div>
+
+    <div class="uploadit--controls">
+
+        <div class="uploadit--controls-inner">
+            <button type="button" class="uploadit--upload">
+                <span class="uploadit--label">{{ uploader.selectText }}</span>
+                {% if uploader.enableDropToUpload %}
+                    <span>or drop files here</span>
+                {% endif %}
+            </button>
+            <input type="file" name="uploaditAssetInput" style="display:none;"{{ not uploader.limit or uploader.limit > 1 ? ' multiple' }} />
+        </div>
+
+    </div>
+
+    <div class="uploadit--preload uploadit--isHidden"></div>
+
+</div>

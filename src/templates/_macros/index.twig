@@ -2,9 +2,17 @@
 	{% set config = name is iterable ? name : {
 		icon: name
 	} %}
-	{% include "upload/_macros/_icon" with (config) only %}
+	{% include "upload/_macros/icon" with (config) only %}
 {% endmacro %}
 
 {% macro preview(config) %}
-	{% include "upload/_macros/_preview" with (config ?? {}) only %}
+	{% include "upload/_macros/preview" with (config ?? {}) only %}
+{% endmacro %}
+
+{% macro previewLogo(config) %}
+	{% include "upload/_macros/previewLogo" with (config ?? {}) only %}
+{% endmacro %}
+
+{% macro previewBg(config) %}
+	{% include "upload/_macros/previewBg" with (config ?? {}) only %}
 {% endmacro %}
