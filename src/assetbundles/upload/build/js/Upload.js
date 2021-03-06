@@ -241,13 +241,13 @@ var UploadAssets = (function() {
 				if (assets.length > leftOfLimit) {
 					switch(leftOfLimit) {
 						case(0):
-							api.setGlobalError('You can\'t upload any more assets');
+							api.setGlobalError('You can\'t upload any more');
 							break;
 						case(1):
-							api.setGlobalError('You can only upload another 1 asset');
+							api.setGlobalError('You can only upload 1 more');
 							break;
 						default:
-							api.setGlobalError('You can only upload another ' + leftOfLimit + ' assets');
+							api.setGlobalError('You can only upload ' + leftOfLimit + '' + (numberOfUploadedAssets > 0 ? ' more' : ''));
 							break;
 					}
 					return;
