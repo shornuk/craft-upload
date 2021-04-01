@@ -1,6 +1,6 @@
 <?php
 /**
- * Uploadit plugin for Craft CMS 3.x
+ * Upload plugin for Craft CMS
  *
  * Front end asset upload tools for Craft CMS
  *
@@ -31,7 +31,7 @@ use yii\base\Event;
  * @package   Uploadit
  * @since     1.0.0
  *
- * @property  UploaditServiceService $uploaditloaderService
+ * @property  UploadServiceService $uploadloaderService
  */
 class Upload extends Plugin
 {
