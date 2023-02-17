@@ -191,7 +191,7 @@ abstract class Uploader extends Model implements UploaderInterface
 
     private function _checkTransformExists()
     {
-        if (is_string($this->transform) && !empty($this->transform) && !Craft::$app->getAssetTransforms()->getTransformByHandle($this->transform)) {
+        if (is_string($this->transform) && !empty($this->transform) && !Craft::$app->getImageTransforms()->getTransformByHandle($this->transform)) {
             $this->addError('transform', Craft::t('upload', 'Asset transform does not exist'));
             return false;
         }

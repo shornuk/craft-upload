@@ -19,7 +19,7 @@
     {% set height = uploader.height ?? false %}
     {% if not (width and height) %}
         {% if not uploader.default and not uploader.photo %}
-            {% set transformData = transform ? craft.app.assetTransforms.getTransformByHandle(transform) : false %}
+            {% set transformData = transform ? craft.app.imageTransforms.getTransformByHandle(transform) : false %}
             {% set width = transformData.width|default(uploader.defaultWidth) %}
             {% set height = transformData.height|default(uploader.defaultHeight) %}
         {% else %}
