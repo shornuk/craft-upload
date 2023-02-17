@@ -27,6 +27,7 @@ class UploadService extends Component
     	{
     		$field = UploadHelper::getFieldByHandle($handleOrId);
     	}
+
     	return $field;
     }
 
@@ -45,6 +46,7 @@ class UploadService extends Component
     	{
     		$volume = Craft::$app->getVolumes()->getVolumeByHandle($handleOrId);
     	}
+
     	return $volume;
     }
 

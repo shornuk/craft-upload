@@ -16,7 +16,9 @@ class UserPhotoUploader extends Uploader
 {
     // Static
     // =========================================================================
-
+    /**
+     * @var int
+     */
     const DEFAULT_SIZE = 100;
 
     // Static
@@ -31,10 +33,15 @@ class UserPhotoUploader extends Uploader
     // =========================================================================
 
     public $default;
+
     public $width;
+
     public $height;
+
     public $photo;
+
     public $round = false;
+
     public $imageClasses;
 
 
@@ -59,19 +66,13 @@ class UserPhotoUploader extends Uploader
 
     }
 
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules[] = [['name'], 'required'];
         $rules[] = [['width', 'height'], 'number'];
         $rules[] = [['imageClasses'], 'string'];
         return $rules;
-    }
-
-    public function getJavascriptProperties(): array
-    {
-        $variables = parent::getJavascriptProperties();
-        return $variables;
     }
 
     public function setTarget(): bool

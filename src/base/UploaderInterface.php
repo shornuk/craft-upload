@@ -15,5 +15,6 @@ interface UploaderInterface
     // =========================================================================
 
     public function getJavascriptProperties(): array;
+
     public function setTarget(): bool;
 }

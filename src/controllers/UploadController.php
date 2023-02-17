@@ -17,7 +17,7 @@ class UploadController extends Controller
     // Protected Properties
     // =========================================================================
 
-    protected $allowAnonymous = ['index', 'can-upload'];
+    protected array|int|bool $allowAnonymous = ['index', 'can-upload'];
 
     // Public Methods
     // =========================================================================
@@ -133,12 +133,13 @@ class UploadController extends Controller
         $this->requireLogin();
 
         $request = Craft::$app->getRequest();
-        $transform = $request->getParam('transform', '');
+        $request->getParam('transform', '');
 
         if (($file = UploadedFile::getInstanceByName('photo')) === null)
         {
             return $this->asErrorJson(Craft::t('upload', 'User photo is required.'));
         }
+
         try {
             if ($file->getHasError())
             {
@@ -158,15 +159,16 @@ class UploadController extends Controller
                 'photo' => $user->getPhoto()->getUrl($transform),
             ]);
 
-        } catch (\Throwable $exception) {
+        } catch (\Throwable $throwable) {
 
             if (isset($fileLocation))
             {
                 FileHelper::unlink($fileLocation);
             }
-            Craft::error('There was an error uploading the photo: '.$exception->getMessage(), __METHOD__);
+
+            Craft::error('There was an error uploading the photo: '.$throwable->getMessage(), __METHOD__);
             return $this->asErrorJson(Craft::t('app', 'There was an error uploading your photo: {error}', [
-                'error' => $exception->getMessage()
+                'error' => $throwable->getMessage()
             ]));
         }
     }
@@ -180,6 +182,7 @@ class UploadController extends Controller
         if ($user->photoId) {
             Craft::$app->getElements()->deleteElementById($user->photoId, Asset::class);
         }
+
         $user->photoId = null;
         Craft::$app->getElements()->saveElement($user, false);
         return $this->asJson(['success' => true]);

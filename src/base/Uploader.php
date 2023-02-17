@@ -16,9 +16,19 @@ abstract class Uploader extends Model implements UploaderInterface
 
     // Constants
     // =========================================================================
-
+    /**
+     * @var string
+     */
     const TYPE_VOLUME = 'volume';
+
+    /**
+     * @var string
+     */
     const TYPE_FIELD = 'field';
+
+    /**
+     * @var string
+     */
     const TYPE_USER_PHOTO = 'userPhoto';
 
     // Private
@@ -48,22 +58,33 @@ abstract class Uploader extends Model implements UploaderInterface
 
     // Settings
     public $enableDropToUpload = true;
+
     public $enableReorder = true;
+
     public $enableRemove = true;
 
     // Styles, Layout & Preview
-    public $layout = 'grid'; // grid or list
-    public $view = 'auto'; // auto (best guess), image, file, background
+    public $layout = 'grid';
+     // grid or list
+    public $view = 'auto';
+     // auto (best guess), image, file, background
     public $customClass;
+
     public $themeColour = '#000000';
+
     public $selectText;
+
     public $dropText;
+
     public $showUploadIcon = true;
 
     // Asset
     public $transform = '';
+
     public $limit;
+
     public $maxSize;
+
     public $allowedFileExtensions;
 
 
@@ -103,13 +124,13 @@ abstract class Uploader extends Model implements UploaderInterface
         ]);
     }
 
-    public function rules()
+    public function rules(): array
     {
         // IDEA: Should target use this for validation: https://www.yiiframework.com/doc/guide/2.0/en/tutorial-core-validators#filter
 
         $rules = parent::rules();
         $rules[] = [['id'], 'required'];
-        $rules[] = [['maxSize'], 'integer', 'max' => $this->_defaultMaxUploadFileSize, 'message' => Craft::t('upload', 'Max file can\'t be greater than the global setting maxUploadFileSize')];
+        $rules[] = [['maxSize'], 'integer', 'max' => $this->_defaultMaxUploadFileSize, 'message' => Craft::t('upload', "Max file can't be greater than the global setting maxUploadFileSize")];
         return $rules;
     }
 
@@ -158,13 +179,11 @@ abstract class Uploader extends Model implements UploaderInterface
 
     protected function getCustomCss()
     {
-      $css = '
+      return '
         #'.$this->id.' .uploadit--isLoading:after { border-color: '.$this->themeColour.'; }
         #'.$this->id.' .uploadit--label { background-color: '.$this->themeColour.'; }
         #'.$this->id.' .uploadit--btn { color: '.$this->themeColour.'; }
       ';
-
-      return $css;
     }
 
     // Private Methods
@@ -172,14 +191,11 @@ abstract class Uploader extends Model implements UploaderInterface
 
     private function _checkTransformExists()
     {
-        if(is_string($this->transform) && !empty($this->transform))
-        {
-            if(!Craft::$app->getAssetTransforms()->getTransformByHandle($this->transform))
-            {
-                $this->addError('transform', Craft::t('upload', 'Asset transform does not exist'));
-                return false;
-            }
+        if (is_string($this->transform) && !empty($this->transform) && !Craft::$app->getAssetTransforms()->getTransformByHandle($this->transform)) {
+            $this->addError('transform', Craft::t('upload', 'Asset transform does not exist'));
+            return false;
         }
+
         return true;
     }
 }

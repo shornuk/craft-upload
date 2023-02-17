@@ -39,14 +39,11 @@ class UploadHelper
         $fileKinds = AssetsHelper::getFileKinds();
 
         $allowedFileExtensions = [];
-        if($kinds)
+        foreach($kinds as $kind)
         {
-            foreach($kinds as $kind)
+            if(array_key_exists($kind, $fileKinds))
             {
-                if(array_key_exists($kind, $fileKinds))
-                {
-                    $allowedFileExtensions = array_merge($allowedFileExtensions, $fileKinds[$kind]['extensions']);
-                }
+                $allowedFileExtensions = array_merge($allowedFileExtensions, $fileKinds[$kind]['extensions']);
             }
         }
 
@@ -60,6 +57,7 @@ class UploadHelper
                 $vaidatedAllowedFileExtensions[] = $allowedFileExtension;
             }
         }
+
         return $vaidatedAllowedFileExtensions;
     }
 
@@ -67,6 +65,7 @@ class UploadHelper
     // =========================================================================
 
     private static $_fieldsMapType = AssetsField::class;
+
     private static $_fieldsMap;
 
     public static function getFieldsMap()

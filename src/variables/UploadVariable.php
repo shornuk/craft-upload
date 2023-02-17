@@ -42,7 +42,7 @@ class UploadVariable
     {
         try{
             $uploader = new $type($attributes);
-        } catch(\Throwable $exception) {
+        } catch(\Throwable $throwable) {
             $uploader = false;
         }
 

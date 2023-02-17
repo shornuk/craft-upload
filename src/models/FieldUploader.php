@@ -24,8 +24,11 @@ class FieldUploader extends Uploader
     // =========================================================================
 
     public $name;
+
     public $field;
+
     public $element;
+
     public $saveOnUpload = false;
 
     // Public Methods
@@ -39,7 +42,7 @@ class FieldUploader extends Uploader
         $this->setAttributes($attributes, false);
     }
 
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules[] = [['name'], 'required'];

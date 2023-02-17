@@ -23,6 +23,7 @@ class VolumeUploader extends Uploader
     // =========================================================================
 
     public $volume;
+
     public $folder;
 
     // Public Methods
@@ -40,7 +41,7 @@ class VolumeUploader extends Uploader
         $this->enableRemove = false;
     }
 
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules[] = [['id'], 'required'];
@@ -114,6 +115,7 @@ class VolumeUploader extends Uploader
                 $this->addError('folder', Craft::t('upload', 'We cant find the folder path in the volume supplied.'));
                 return false;
             }
+
             $folder = Craft::$app->getAssets()->getFolderById($folderId);
             if(!$folder)
             {
