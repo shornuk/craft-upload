@@ -16,10 +16,6 @@ abstract class Uploader extends Model implements UploaderInterface
 
     // Constants
     // =========================================================================
-    /**
-     * @var string
-     */
-    const TYPE_VOLUME = 'volume';
 
     /**
      * @var string

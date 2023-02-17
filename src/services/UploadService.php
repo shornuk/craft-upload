@@ -50,10 +50,4 @@ class UploadService extends Component
     	return $volume;
     }
 
-    public function getFirstViewableVolume()
-    {
-    	$viewableVolumes = Craft::$app->getVolumes()->getViewableVolumes();
-    	return $viewableVolumes[0] ?? false;
-    }
-
 }

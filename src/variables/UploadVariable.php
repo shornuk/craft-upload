@@ -6,7 +6,6 @@ use shornuk\upload\models\Uploader; // DEPRICIATE
 use shornuk\upload\Upload;
 use shornuk\upload\assetbundles\upload\UploadAssetBundle;
 use shornuk\upload\base\UploaderInterface;
-use shornuk\upload\models\VolumeUploader;
 use shornuk\upload\models\FieldUploader;
 use shornuk\upload\models\UserPhotoUploader;
 
@@ -19,11 +18,6 @@ class UploadVariable
 {
     // Public Methods
     // =========================================================================
-
-    public function volumeUploader($attributes = [])
-    {
-        return $this->_renderUploader(VolumeUploader::class, $attributes);
-    }
 
     public function fieldUploader($attributes = [])
     {
