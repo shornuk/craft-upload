@@ -9,7 +9,7 @@
         "craftcms",
         "craft-plugin",
         "asset uploader",
-        "front end",
+        "front end"
     ],
     "support": {
         "docs": "https://github.com/shornuk/craft-upload/blob/master/README.md",
