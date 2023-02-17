@@ -133,7 +133,7 @@ class UploadController extends Controller
         $this->requireLogin();
 
         $request = Craft::$app->getRequest();
-        $request->getParam('transform', '');
+        $transform = $request->getParam('transform', '');
 
         if (($file = UploadedFile::getInstanceByName('photo')) === null)
         {
