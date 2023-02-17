@@ -1,7 +1,6 @@
-# Uploadit plugin for Craft CMS 3.x
+# Upload plugin for Craft CMS
 
-The unausuming front end asset uploader for Craft 3.
-Use as a standalone uploader or as field in one of your forms:
+Front end asset uploader for Craft 4.
 
 ## Features:
 
@@ -9,7 +8,6 @@ Use as a standalone uploader or as field in one of your forms:
 *   Reorder & remove uploads
 *   Asset previews
 *   Customisable
-*   It's Vanilla (Zero dependencies writtin in battle tested javascript)
 
 ### Requirements
 
