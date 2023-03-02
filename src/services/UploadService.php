@@ -31,23 +31,4 @@ class UploadService extends Component
     	return $field;
     }
 
-    public function getVolumeByHandleOrId($handleOrId)
-    {
-    	if(!$handleOrId)
-    	{
-    		return false;
-    	}
-
-    	if(is_numeric($handleOrId))
-    	{
-			$volume = Craft::$app->getVolumes()->getVolumeById($handleOrId);
-    	}
-    	else
-    	{
-    		$volume = Craft::$app->getVolumes()->getVolumeByHandle($handleOrId);
-    	}
-
-    	return $volume;
-    }
-
 }
